@@ -31,7 +31,7 @@ document
   });
 
 document.getElementById("searchIcon").addEventListener("click", function () {
-  var dropdown = document.getElementById("dropdownMenu");
+  const dropdown = document.getElementById("dropdownMenu");
   if (dropdown.style.display === "none" || dropdown.style.display === "") {
     dropdown.style.display = "block";
   } else {
@@ -41,9 +41,9 @@ document.getElementById("searchIcon").addEventListener("click", function () {
 
 window.onclick = function (event) {
   if (!event.target.matches(".searchIcon")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    for (var i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
+    const dropdowns = document.getElementsByClassName("dropdown-content");
+    for (let i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
       if (openDropdown.style.display === "block") {
         openDropdown.style.display = "none";
       }
@@ -59,6 +59,7 @@ async function checkURL(url) {
     return false;
   }
 }
+
 let searchUrl = "https://www.google.com/search?q=";
 document.getElementById("searchButton").onclick = async function (event) {
   event.preventDefault();
@@ -72,7 +73,6 @@ document.getElementById("searchButton").onclick = async function (event) {
       url = "https://" + url;
     }
   }
-  url = url + "&t=web";
   const activeTab = document.querySelector(".tab.active");
   const link = activeTab.getAttribute("link");
   const activeIframe = document.querySelector(`iframe[link="${link}"]`);
@@ -337,9 +337,9 @@ function attachIframeClickListener(iframe) {
       const favicon = activeTab.querySelector(`img[link="${link}"]`);
 
       if (activeIframe.getAttribute("origin")) {
-        favicon.src = `https://favicone.com/${activeIframe
-          .getAttribute("origin")
-          .origin.replace("https://", "")}`;
+        let favOrigin = activeIframe.getAttribute("origin");
+        favOrigin = favOrigin.replace("https://", "");
+        favicon.src = `https://www.google.com/s2/favicons?domain=${favOrigin}`;
       }
     }
   });
